@@ -7,6 +7,38 @@
     <title>Quiz</title>
   </head>
   <body>
-<h1>toto</h1>
+    <header>
+      <h1>Quiz sur les capitales des pays</h1>
+    </header>
+    <main>
+      <div class="progressBarChrono">
+          <div class="progress-container" aria-label="Progression du quiz">
+          <div class="progress-bar" id="progressBar"></div>
+          <span class="progress-text" id="progressText">0%</span>
+      </div>
+      <div class="chronomettre">
+        <! -- affichage en gros caractères -->
+        <p
+          id="affichage"
+          style="
+            margin: 30px;
+            display: none;
+            font-size: 3em;
+            font-family: sans-serif;
+            "
+        >
+          0
+        </p>
+        </div>
+      </div>
+
+      <div class="question active">
+        <h2>
+          Commencer le quiz sur les <br/>
+          capitales des pays 🌍
+        </h2>
+
+      </div>
+    </main>
   </body>
 </html>
