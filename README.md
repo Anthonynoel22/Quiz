@@ -1,6 +1,6 @@
 ## 🎯 Quiz
 
-ne application de quiz interactive permettant de tester ses connaissances de manière ludique et dynamique.
+Une application de quiz interactive permettant de tester ses connaissances de manière ludique et dynamique.
 
 ## ✨ Fonctionnalités
 
