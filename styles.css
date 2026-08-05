@@ -1,0 +1,30 @@
+html body {
+    height: 100%; /* assure 100% de la hauteur */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    background-image: url("images/Terre.jpg"); /* image de font */
+    background-size: cover; /* prend tout l'écran */
+    background-position: center; /* centrée */
+    background-repeat: no-repeat; /* pas de répétition */
+    background-attachment: fixed; /* reste fixe au scroll */
+
+    /* centrage du contenu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* style global du texte */
+    font-family: "Poppins", sans-serif;
+    caret-color: white;
+
+}
+
