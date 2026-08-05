@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/images/question.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css">
     <title>Quiz</title>
+    <script src="/script.js" defer></script>
   </head>
   <body>
     <header>
@@ -17,7 +19,7 @@
           <span class="progress-text" id="progressText">0%</span>
       </div>
       <div class="chronomettre">
-        <! -- affichage en gros caractères -->
+        <!-- affichage en gros caractères -->
         <p
           id="affichage"
           style="
@@ -38,6 +40,126 @@
           capitales des pays 🌍
         </h2>
 
+        <p>vous avez 10 secondes pour répondre aux questions</p>
+        <button type="button" onclick="startQuiz()">Commencer</button>
+      </div>
+
+      <div class="question 1">
+          <h2>Quelle est la capitale de l'Allemagne ?</h2>
+          <img src="images/Allemagne.jpg" alt="ville d'Allemagne"/>
+          <button value="0">Francfort</button>
+          <button value="0">Stuttgart</button>
+          <button value="1">Berlin</button>
+          <button value="0">Munich</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+          suivant
+          </button>
+      </div>
+      <div class="question 2">
+        <h2>Quelle est la capitale de la Bolivie ?</h2>
+        <img src="images/Bolivie.jpg" alt="paysage de Bolivie">
+        <button value="0">Cochabamba</button>
+        <button value="1">La Paz</button>
+        <button value="0">Tarija</button>
+        <button value="0">Oruro</button>
+        <button class="suivant" type="button" onclick="nextQuestions()">
+          suivant
+        </button>
+      </div>
+      <div class="question 3">
+        <h2>Quelle est la capitale de la Chine ?</h2>
+        <img src="images/Chine.jpg" alt="paysage de la Chine">
+        <button value="1">Pékin</button>
+        <button value="0">Shanghai</button>
+        <button value="0">Canton</button>
+        <button value="0">Hangzhou</button>
+        <button class="suivant" type="button" onclick="nextQuestions()">
+          suivant
+        </button>
+      </div>
+      <div class="question 4">
+        <h2>Quelle est la capitale de l'Espagne ?</h2>
+        <img src="images/Espagne.jpg" alt="ville d'Espagne">
+        <button value="0">Séville</button>
+        <button value="0">Barcelone</button>
+        <button value="0">San Sébastien</button>
+        <button value="1">Madrid</button>
+        <button class="suivant" type="button" onclick="nextQuestions()">
+          suivant
+        </button>
+      </div>
+      <div class="question 5">
+          <h2>Quelle est la capitale des États-Unis ?</h2>
+          <img src="images/États-Unis.jpg" alt="ville des États-Unis">
+          <button value="0">Miami</button>
+          <button value="0">New-York</button>
+          <button value="1">Washington</button>
+          <button value="0">Los-Angeles</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+            suivant
+          </button>
+      </div>
+      <div class="question 6">
+          <h2>Quelle est la capitale de la Nouvelle-Zélande ?</h2>
+          <img src="images/Nouvelle-Zélande.jpg" alt="paysage de Nouvelle-Zélande">
+          <button value="1">Wellington</button>
+          <button value="0">Dunedin</button>
+          <button value="0">Auckland</button>
+          <button value="0">Christchurch</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+            suivant
+          </button>
+      </div>
+      <div class="question 7">
+          <h2>Quelle est la capitale du Sénégal ?</h2>
+          <img src="images/Sénégal.jpg" alt="paysage du Sénégal">
+          <button value="0">Touba</button>
+          <button value="1">Dakar</button>
+          <button value="0">Kaolack</button>
+          <button value="0">Saint-Louis</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+            suivant
+          </button>
+      </div>
+      <div class="question 8">
+          <h2>Quelle est la capitale du Sri-Lanka ?</h2>
+          <img src="images/Sri-Lanka.jpg" alt="paysage du Sri-Lanka">
+          <button value="0">Jaffna</button>
+          <button value="0">Kandy</button>
+          <button value="1">Colombo</button>
+          <button value="0">Galle</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+            suivant
+          </button>
+      </div>
+      <div class="question 9">
+          <h2>Quelle est la capitale de la Tunisie ?</h2>
+          <img src="images/Tunisie.jpg" alt="ville de Tunisie">
+          <button value="0">Kairouan</button>
+          <button value="0">Sousse</button>
+          <button value="0">Monastir</button>
+          <button value="1">Tunis</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+            suivant
+          </button>
+      </div>
+      <div class="question 10">
+          <h2>Quelle est la capitale de L'Uruguay ?</h2>
+          <img src="images/Uruguay.jpg" alt="ville d'Uruguay">
+          <button value="1">Montevideo</button>
+          <button value="0">Ciudad de la Costa</button>
+          <button value="0">Salto</button>
+          <button value="0">Maldonado</button>
+          <button class="suivant" type="button" onclick="nextQuestions()">
+            suivant
+          </button>
+      </div>
+      <div class="question result">
+        <h2>Résultat du quiz</h2>
+        <p id="resultText" style="font-size: 1.5em; margin: 20px 0"></p>
+        <button class="recommencer" type="button" onclick="recommencerQuiz()">
+          Recommencer
+        </button>
       </div>
     </main>
   </body>
