@@ -28,3 +28,145 @@ body {
 
 }
 
+.question {
+    display: none;
+    position: relative;
+}
+
+.question.active {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* les boutons de réponse prennent toute la largeur */
+}
+
+.question.active h2,
+header h1 {
+    font-size: 2.2rem;
+    color: #f5f5f5;
+    font-weight: 500;
+}
+
+.question.active button {
+    background-color: #304b75;
+    color: #e2e8f0;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 50px; /* forme ovale */
+    cursor: pointer;
+    transition: background-color 0.3 ease;
+}
+
+.question.active button:hover {
+    background-color: #4266a1;
+}
+
+.question button {
+    display: block;
+    width: 100%; /* prend toute la largeur du conteneur */
+    max-width: 600px; /* limite la taille sur grand écrand */
+    margin: 5px auto; /* espace entre les boutons de centrage */
+    padding: 16px 24px;
+    background-color: #1e1e2f;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transform: all 0.2s ease; /* animation douce */
+}
+
+/* effet quand on passe la souris */
+.question button:hover {
+    background-color: #2b2b3d;
+    transform: scale(1.02);
+}
+
+/* effet quand on clique */
+.question button:active {
+    background-color: #3a3a4f;
+    transform: scale(0.98);
+}
+
+.question .suivant {
+    align-self: flex-end; /* aligne le bouton à droite dans la colonne */
+    width: auto; /* plus de 100% */
+    max-width: none;
+    margin: 8px 0 0 auto; /* pousse à droite */
+    padding: 10px 26px;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.question .suivant:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+.question .suivant:active {
+    transform: translateY(0);
+}
+
+.progress-container {
+    display: none; 
+    position: relative; 
+    height: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 8px auto;
+    background: #eee;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7c3aed, #22d3ee);
+    transition: width 300ms ease;
+}
+
+.progress-text {
+    position: absolute;
+    right: 8px;
+    top: 50px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #090808;
+}
+
+.suivant:hover {
+    background-color: #2563eb;
+    transform: translateY(-2%);
+}
+
+.suivant:active {
+    transform: translateY(0);
+}
+
+header {
+    display: none;
+}
+
+main {
+    width: 100%;
+    text-align: center;
+    display: block;
+    background-color: rgba(13, 28, 53, 0.89);
+    padding: 1px 10px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0);
+    max-width: 700px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+}
