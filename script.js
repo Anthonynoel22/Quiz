@@ -59,3 +59,54 @@ function updateProgress(currentIndex, totalQuestion) {
         )} / ${totalQuestion}`;
     }
 }
+
+// Gère la sauvegarde, la reprise et le meilleur score du quiz pour rassembler les cles.
+const LS = {
+    state: "quiz-state", // garde la partie en cours
+    best: "quiz-state", // garde le meilleur score
+};
+
+// reprend la sauvegarde et reprendre à l'endroit où on était 
+function loadState() {
+    try {
+        const raw = localStorage.getItem(LS.state); // localStorage = état brut getItem pour aller récupérer et LS state pour retrouver la bonne valeur
+        if (!raw) return false; // si rien n'a été sauvegardé, il n'y a rien à charger, donc on retourne simplement false
+        const s =JSON.parse(raw); // JSON.parce() va transformer ce qu'on a récupéré en un objet utilisable en JavaScript
+        // Récupère les valeurs sauvegardées
+        current = s.current; // numéros de la question actuelle 
+        score = s.score; // score du joueur
+        secondes = s.secondes; // chrono
+    
+        return true; // tout s'est bien passé 
+        } catch {
+        return false;
+    }
+}    
+
+// Pour enregistrer la progression actuelle
+function saveState() {
+    try {
+        localStorage.setItem(
+            LS.state,
+            JSON.stringify({
+                // c'est l'inverse de json.parce ça prend le js et le transforme en chaine de caractère "texte pour le stocker"
+                current, // 1..N (0 = accueil)
+                score, // nb de bonnes réponses
+                secondes, // temps écoulé sur la question courante 
+                total: quizData.length, // dire à quelle question je suis 
+                updatedAt: Date.now(), // pour savoir à quel heure et date ça a enregistrer la progression
+            })
+        );
+    } catch {} 
+}
+
+// Meilleur score - enregistre si on fait mieux
+function saveBest(finalScore) {
+    try {
+        const prev = Number(localStorage.getItem(LS.best) || 0);
+    } catch (error) {
+        
+    }
+}
+
+
