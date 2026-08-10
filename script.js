@@ -103,10 +103,66 @@ function saveState() {
 // Meilleur score - enregistre si on fait mieux
 function saveBest(finalScore) {
     try {
-        const prev = Number(localStorage.getItem(LS.best) || 0);
-    } catch (error) {
-        
-    }
+        const prev = Number(localStorage.getItem(LS.best) || 0); // on va chercher dans le localStorage la valeur de LS.best, qui est notre meilleur score, si on le trouve, on le convertit en nombre avec Number()
+        if (finalScore > prev) {
+            // on ne garde le nouveau score que s'il est plus grand que l'ancien, pour toujours enregistrer le meilleur score.
+            localStorage.setItem(LS.best, String(finalScore)); // on enregistre le nouveaux meilleurs score et on le convertit en texte pour bien le stocker sous forme de chaine de caractère.
+        }
+    } catch  {}
 }
 
+// Récupérer le meilleurs score
+function getBest() {
+    try {
+        return Number(localStorage.getItem(LS.best || 0)); // aller chercher dans le localStorage la valeur du meilleur score (LS.best), si elle existe, on la convertit en nombre et on la retourne 
+    } catch {
+        return 0; // si elle n'existe pas, ou s'il y a une erreur, on retourne simplement 0 par défaut.
+    }
+    
+}
+
+// Démarre un nouveau chrono
+function startChrono() {
+    secondes = 0;
+    if (chronoDisplay) chronoDisplay.textContent = secondes;
+
+    // Nettoie l'ancien intervalle s'il existe
+    if (chrono) clearInterval(chrono);
+
+    chrono = setInterval(tictictic, 1000); // chaque seconde
+}
+
+// Fonction appelée chaque seconde 
+function tictictic() {
+    secondes++;
+    if (chronoDisplay) chronoDisplay.textContent = secondes;
+
+    // Sauvegarde de la progression à chaque tic
+    saveState();
+
+    const activeQuestion= document.querySelector(".question.active");
+    if(!activeQuestion) return;
+}
+
+// Si le temps est écoulé (10 secondes)
+if (secondes >= 10) {
+    clearInterval(chrono);
+}
+
+// Bloque tous les boutons de réponses
+const boutons = activeQuestion.querySelectorAll("button:not(.suivant)");
+boutons.forEach((btn) => {
+    btn.disabled = true;
+    if (btn.value === "1") {
+        btn.style.backgroundColor = "#16a34a"; //vert 
+        if(!btn.textContent.includes("✅")) btn.textContent += "✅";
+    }else{
+        btn.style.backgroundColor = "#dc2626"; //rouge
+        if (!btn.textContent.includes("❌")) btn.textContent += "❌";
+    }
+});
+
+// Active le bouton "suivant" après timeout
+const btnSuivant = activeQuestion.querySelector(".suivant");
+if (btnSuivant) btnSuivant.disabled = false;
 
