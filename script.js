@@ -241,3 +241,116 @@ function resetQuestionButtons(qE1) {
     if (suivant) suivant.disabled = true;
 }
 
+function startQuiz() {
+    //Reprendre l'état si dispo (current, score, secondes)
+    const hasState = loadState(); //true si on a trouvé quelque chose, sinon false.
+
+    //Afficher barre et chrono
+    if (progressContainer) progressContainer.style.display = "block";
+    if (chronoDisplay) {
+        chronoDisplay.style.display = "block";
+        chronoDisplay.textContent = String(secondes || 0);
+    }
+
+    //Masquer l'écran d'accueil
+    if (question[0]) question[0].classList.remove("active");
+
+    // Si pas d'état, on démarre à la question 1 
+    if (!hasState || current === 0) current = 1;
+
+    // Afficher la question courante
+    const qE1 = question[current];
+    if(qE1) {
+        qE1.classList.add(".active");
+        resetQuestionButtons(qE1); // remet les boutons propres
+    }
+
+    // Prépare les handlers (si pas déjà fait)
+    attachAnswerHandlers();
+
+    // Progression + Chrono + Sauvegarde
+    setTimeout(startChrono, 0);
+    updateProgress(current, quizData.length);
+
+    saveState();
+}
+
+function nextQuestion() {
+    // Indice de la dernière "vraie" question (pas accueil/réelles)
+    const lastQuestionIndex = quizData.length; 
+
+    // Cacher la question actuellement visible
+    const active = question[current];
+    if (active) active.classList.remove("active");
+
+    // Avancer si on n'est pas à la dernière question
+    if (current < lastQuestionIndex) {
+        current++;
+
+        // Affiche la nouvelle question
+        const nextQ = question[current];
+        if (nextQ) {
+            nextQ.classList.add("active");
+            resetQuestionButtons(nextQ);
+        }
+        // Relance chrono + progression + sauvegarde
+        startChrono();
+        updateProgress(current, quizData.length);
+        saveState();
+        return;
+    }
+
+    // Sinon fin du quiz écran résultat
+    if (chrono) clearInterval(chrono);
+
+    // Cacher barre & chrono
+    if (progressContainer) progressContainer.style.display = "none";
+    if (chronoDisplay) chronoDisplay.style.display = "none";
+
+    // Texte résultat + meilleur score
+    const resulDiv = document.querySelector(".result");
+    const resultText = document.getElementById("resultText");
+    if (resultText) {
+        saveBest(score);
+        const best = getBest();
+        resultText.textContent = `🎯 Tu as obtenu ${score}/${quizData.length} — 🏆 Meilleur: ${best}`;
+    }
+    if (resultDiv) resultDiv.classList.add("active");
+
+    // On efface la progression (partie terminée)
+    clearState();
+}
+
+function recommencerQuiz() {
+    // Reset variables & chrono
+    score = 0;
+    current = 0; // on revient à l'accueil
+    secondes = 0;
+    if (chrono) clearInterval(chrono);
+    clearState();
+
+    // Chrono
+    if (chronoDisplay) {
+        chronoDisplay.textContent = "0";
+        chronoDisplay.style.display = "none";
+    }
+
+    // Barre de progression
+    if (progressContainer) progressContainer.style.display = "none";
+    if (progressBar) progressBar.style.width = "0%";
+    if (progressText) progressText.textContent = "0%";
+
+    // Remettre toutes les questions "propres"
+    Array.from(question).forEach((q) => resetQuestionButtons(q));
+
+    // Affichages : cacher résultat, montrer accueil
+    const resultDiv = document.querySelector(".result");
+    if (resultDiv) resultDiv.classList.remove("active");
+    if (questions[0]) question[0].classList.add("active");
+
+    // Progression affichée à 0
+    updateProgress(0, quizData.length);
+}
+
+
+
