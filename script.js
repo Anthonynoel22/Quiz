@@ -166,3 +166,78 @@ boutons.forEach((btn) => {
 const btnSuivant = activeQuestion.querySelector(".suivant");
 if (btnSuivant) btnSuivant.disabled = false;
 
+// Prépare les boutons de réponse: on mémorise le texte d'origine une seul fois
+function primeAnswerButtons() {
+    const answerButtons = document.querySelectorAll(".question button:not(.suivant)");
+
+    answerButtons.forEach((b) => {
+        if (!b.dataset.originText) {
+            b.dataset.originText = b.textContent.trim();
+        }
+    });
+}
+
+// Gère le clic sur un bouton de réponse
+function handleAnswerClick(btn) {
+    // Si temps écoulé, on fait rien
+    if (secondes >= 10) return;
+
+    const parent = btn.closest(".question");
+    if (!parent) return;
+
+    // Bloque toutes les réponses de cette question
+    const allBtns = parent.querySelectorAll("button:not(.suivant)");
+    allBtns.forEach((b) => (b.disabled = true));
+
+    // Mise à jour score + feedback
+    if (btn.value === "1") {
+        score++;
+        if(!btn.textContent.includes("✅")) btn.textContent += "✅";
+        btn.style.backgroundColor = "#16a34a";
+    } else {
+        if (!btn.textContent.includes("❌")) btn.textContent += "❌";
+        btn.style.backgroundColor = "#dc2626";
+        const correct = parent.querySelector('.button[value="1"]');
+        if (correct) {
+            correct.style.backgroundColor = "#16a34a";
+            if (!correct.textContent.includes("✅")) correct.textContent += "✅";
+        }
+    }
+
+    // Active le bouton "suivant"
+    const suivant = parent.querySelector(".suivant");
+    if (suivant) suivant.disabled = false;
+
+    // Stoppe le chrono et sauvegarde la progression
+    if (chrono) clearInterval(chrono);
+    saveState();
+}
+
+// Attache un listener (écouteur de clic) à tous les boutons de réponse (de toutes les questions du DOM)
+function attachAnswerHandlers() {
+    primeAnswerButtons();
+    const answerButtons = document.querySelectorAll(".question button:not(.suivant)");
+
+    answerButtons.forEach((btn) => {
+        // Évite d'ajouter plusieurs fois le même listener si on relance init()
+        if (!btn.dataset.bound) {
+            btn.addEventListener("click", () => handleAnswerClick(btn));
+            btn.dataset.bound = "1";
+        }
+    });
+}
+
+// Remet une question à l'état "propre" (appelé quand on affiche une nouvelle question)
+function resetQuestionButtons(qE1) {
+    const boutons = qE1.querySelectorAll(".button:not(.suivant)");
+    boutons.forEach((b) => {
+        b.disabled = false;
+        b.style.backgroundColor = "";
+        // remet le texte d'origine si présent (supprime ✅/❌)
+        b.textContent = b.dataset.originText || b.textContent.replace(/[✅❌]/g, "");
+    });
+
+    const suivant = qE1.querySelector(".suivant");
+    if (suivant) suivant.disabled = true;
+}
+
