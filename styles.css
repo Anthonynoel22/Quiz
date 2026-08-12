@@ -28,6 +28,14 @@ body {
 
 }
 
+#affichage {
+    margin: 30px;
+    display: none;
+    font-size: 3em;
+    font-family: sans-serif;
+    color: white;
+}
+
 .question {
     display: none;
     position: relative;
