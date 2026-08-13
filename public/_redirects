@@ -1,1 +1,7 @@
-/* /index.html 200
+# Assets statiques : on les sert tels quels
+/*.js   /*.js   200
+/*.css  /*.css  200
+/images/* /images/:splat 200
+
+# Tout le reste → index.html (pour ton SPA / routing)
+/*      /index.html 200
