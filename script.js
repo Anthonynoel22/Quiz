@@ -85,7 +85,7 @@ function saveState() {
     localStorage.setItem(
       LS.state,
       JSON.stringify({
-        // c'est l'inverse de json.parce ça prend le js et ça le transforme en chaine de caractèrere "texte pour le stocker"
+        // c'est l'inverse de json.parse ça prend le js et ça le transforme en chaine de caractèrere "texte pour le stocker"
         current, // 1..N (0 = accueil)
         score, // nb de bonnes réponses
         secondes, // temps écoulé sur la question courante
@@ -98,7 +98,7 @@ function saveState() {
 
 // Efface la progression (après fin de quiz ou “recommencer”)
 function clearState() {
-  localStorage.removeItem(LS.state); //removeitem cest pour effacer et réinitialiser la donner
+  localStorage.removeItem(LS.state); //remove item c'est pour effacer et réinitialiser la donner
 }
 
 // Meilleur score — enregistre si on fait mieux
@@ -154,10 +154,10 @@ function tictictic() {
       btn.disabled = true;
       if (btn.value === "1") {
         btn.style.backgroundColor = "#16a34a"; // vert
-        if (!btn.textContent.includes("✅")) btn.textContent += " ✅";
+        if (!btn.textContent.includes("✅")) btn.textContent += "✅";
       } else {
         btn.style.backgroundColor = "#dc2626"; // rouge
-        if (!btn.textContent.includes("❌")) btn.textContent += " ❌";
+        if (!btn.textContent.includes("❌")) btn.textContent += "❌";
       }
     });
 
@@ -169,9 +169,8 @@ function tictictic() {
 
 // Prépare les boutons de réponse : on mémorise le texte d'origine une seule fois
 function primeAnswerButtons() {
-  const answerButtons = document.querySelectorAll(
-    ".question button:not(.suivant) "
-  );
+  const answerButtons = document.querySelectorAll(".question button:not(.suivant)");
+  
   answerButtons.forEach((b) => {
     if (!b.dataset.originText) {
       b.dataset.originText = b.textContent.trim();
@@ -235,7 +234,7 @@ function resetQuestionButtons(qEl) {
     b.disabled = false;
     b.style.backgroundColor = "";
     // remet le texte d'origine si présent (supprime ✅/❌)
-    b.textContent = b.dataset.origText || b.textContent.replace(/[✅❌]/g, "");
+    b.textContent = b.dataset.originText || b.textContent.replace(/[✅❌]/g, "");
   });
 
   const suivant = qEl.querySelector(".suivant");
