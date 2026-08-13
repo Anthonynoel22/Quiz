@@ -10,6 +10,7 @@ const total = questions.length; // Permet de savoir combien il y a d’écrans �
 const progressContainer = document.querySelector(".progress-container"); //  La barre de progression entière (le cadre).
 const progressText = document.getElementById("progressText"); // Le texte au milieu de la barre (ex: “Question 2 / 10”).
 const chronoDisplay = document.getElementById("affichage"); // L’endroit où tu affiches les secondes du chrono.
+const progressBar = document.getElementById("progressBar");
 
 //Construit un tableau d'objet "quizData" à partir du html existant (on ignore l'écran d'accueil et l'écran résultat)
 function buildQuizDataFromDOM() {
