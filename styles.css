@@ -65,7 +65,7 @@ body {
     border: none;
     border-radius: 50px; /* forme ovale */
     cursor: pointer;
-    transition: background-color 0.3 ease;
+    transition: background-color 0.3s ease;
 }
 
 .question.active button:hover {
@@ -136,6 +136,7 @@ body {
     background: #eee;
     border-radius: 999px;
     overflow: hidden;
+    
 }
 
 .progress-bar {
@@ -148,7 +149,7 @@ body {
 .progress-text {
     position: absolute;
     right: 8px;
-    top: 50px;
+    top: 50%;
     transform: translateY(-50%);
     font-size: 12px;
     color: #090808;
@@ -156,15 +157,11 @@ body {
 
 .suivant:hover {
     background-color: #2563eb;
-    transform: translateY(-2%);
+    transform: translateY(-2px);
 }
 
 .suivant:active {
     transform: translateY(0);
-}
-
-header {
-    display: none;
 }
 
 main {
@@ -175,14 +172,14 @@ main {
     padding: 1px 10px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
     max-width: 700px;
     width: 90%;
     margin: 0 auto;
     padding: 10px;
 }
 
-.progressBarreChrono {
+.progresseBarreChrono {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
