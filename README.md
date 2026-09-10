@@ -17,3 +17,7 @@ Une application de quiz interactive permettant de tester ses connaissances de ma
 ## 🎯 Objectif
 
 Créer une application interactive centrée sur l’expérience utilisateur, tout en mettant en pratique la logique de programmation et la gestion d’état.
+
+## 🧑‍💻 Auteur
+
+Développé par  **Anthony NOEL KIRUPARAJAH** — 2026
